@@ -1,0 +1,13 @@
+auth0:
+  audience: https://poop-not-there
+  domain: https://poopstory.eu.auth0.com/
+spring:
+  security:
+    oauth2:
+      resourceserver:
+        jwt:
+          issuer-uri: https://poopstory.eu.auth0.com/
+          jwks-uri: https://poopstory.eu.auth0.com/.well-known/jwks.json
+logging:
+  level:
+    ROOT: DEBUG
