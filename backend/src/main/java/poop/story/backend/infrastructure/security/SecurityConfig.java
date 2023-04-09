@@ -3,7 +3,6 @@ package poop.story.backend.infrastructure.security;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.core.DelegatingOAuth2TokenValidator;
@@ -32,17 +31,10 @@ public class SecurityConfig {
         an OAuth2 Resource Server, using JWT validation.
         */
         http.authorizeHttpRequests()
-            .requestMatchers(HttpMethod.OPTIONS).permitAll()
-            .requestMatchers(HttpMethod.GET).authenticated()
-            .requestMatchers(HttpMethod.POST).authenticated()
-            .requestMatchers(HttpMethod.PUT).authenticated()
-            .requestMatchers(HttpMethod.DELETE).authenticated()
-            .requestMatchers(HttpMethod.HEAD).authenticated()
-            .requestMatchers(HttpMethod.PATCH).authenticated()
-            .requestMatchers(HttpMethod.TRACE).authenticated()
-            .and()
-            .cors().and()
-            .oauth2ResourceServer().jwt()
+            .requestMatchers("/api/private/**").authenticated()
+            .requestMatchers("/**").permitAll()
+            .and().cors()
+            .and().oauth2ResourceServer().jwt()
             .decoder(jwtDecoder()) ;
         return http.build();
     }
