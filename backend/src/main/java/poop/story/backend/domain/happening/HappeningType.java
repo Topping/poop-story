@@ -7,14 +7,14 @@ public enum HappeningType {
     POO("POO"),
     BOTH("BOTH");
 
-    private final String happeningType;
+    private final String type;
 
-    HappeningType(String happeningType) {
-        this.happeningType = happeningType;
+    HappeningType(String type) {
+        this.type = type;
     }
 
     @JsonValue
     public String happeningType() {
-        return happeningType;
+        return type;
     }
 }

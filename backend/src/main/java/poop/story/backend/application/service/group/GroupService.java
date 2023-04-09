@@ -19,8 +19,8 @@ public class GroupService {
         this.userService = userService;
     }
 
-    public Optional<GroupAggregate> createNewGroup(String subject, String groupName) {
-        return userService.getOrCreateAuthenticatedUser(subject)
+    public Optional<GroupAggregate> createNewGroup(String groupName) {
+        return userService.getOrCreateAuthenticatedUser()
             .map(user -> new GroupAggregate(user, groupName, GroupVisibility.PRIVATE))
             .map(groupRepository::save);
     }

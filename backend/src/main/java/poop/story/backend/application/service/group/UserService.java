@@ -11,7 +11,9 @@ import poop.story.backend.domain.happening.HappeningBySubjectSpecification;
 import poop.story.backend.domain.repository.HappeningRepository;
 import poop.story.backend.domain.repository.UserRepository;
 import poop.story.backend.domain.user.UserAggregate;
+import poop.story.backend.infrastructure.util.SecurityUtil;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -28,33 +30,50 @@ public class UserService {
         this.happeningRepository = happeningRepository;
     }
 
-    public Optional<UserAggregate> getOrCreateAuthenticatedUser(String subject) {
-        var user = getAuthenticatedUser(subject);
+    public Optional<UserAggregate> getOrCreateAuthenticatedUser() {
+        var user = getAuthenticatedUser();
         if (user.isPresent()) return user;
 
-        var userInfo = userInfoService.getUserInfo().blockOptional();
-        if (userInfo.isEmpty()) return Optional.empty();
-
-        var newUser = new UserAggregate(subject, userInfo.get().email());
-        return Optional.of(userRepository.save(newUser));
+        return registerAuthenticatedUser();
     }
 
-    public Optional<UserAggregate> getAuthenticatedUser(String subject) {
-        return userRepository.findByAuthSubject(subject);
+    public Optional<UserAggregate> getAuthenticatedUser() {
+        return SecurityUtil.getAuthSubject()
+            .flatMap(userRepository::findByAuthSubject);
+    }
+
+    public Optional<UserAggregate> registerAuthenticatedUser() {
+        var userInfo = userInfoService.getUserInfo();
+        return userInfo.flatMap(info -> SecurityUtil.getAuthSubject()
+            .map(sub -> new UserAggregate(sub, info.email()))
+            .map(userRepository::save));
+
     }
 
     @Transactional(propagation = Propagation.REQUIRED)
-    public Optional<UserAggregate> addNewHappening(String thisSubject, HappeningDTO dto) {
-        var u = userRepository.findByAuthSubject(thisSubject);
-        if (u.isEmpty()) return Optional.empty();
-        var user = u.get();
-        user.registerHappening(dto);
-        return Optional.of(userRepository.save(user));
+    public Optional<UserAggregate> addNewHappening(HappeningDTO dto) {
+        var u = SecurityUtil.getAuthSubject()
+            .flatMap(userRepository::findByAuthSubject)
+            .orElseGet(() -> registerAuthenticatedUser().orElseThrow());
+
+        u.registerHappening(dto);
+        return Optional.of(userRepository.save(u));
     }
 
     @Transactional
-    public List<Happening> fetchHappenings(String subject) {
-        var spec = new HappeningBySubjectSpecification(subject);
+    public List<Happening> fetchHappenings() {
+        var sub = SecurityUtil.getAuthSubject();
+        if (sub.isEmpty()) return Collections.emptyList();
+
+        var spec = new HappeningBySubjectSpecification(sub.get());
         return happeningRepository.findAll(spec);
+    }
+
+    @Transactional
+    public List<Happening> fetchHappenings(double x1, double y1, double x2, double y2) {
+        var sub = SecurityUtil.getAuthSubject();
+        if (sub.isEmpty()) return Collections.emptyList();
+
+        return happeningRepository.getHappeningsInboundingBox(sub.get(), x1, y1, x2, y2);
     }
 }

@@ -1,14 +1,15 @@
 package poop.story.backend.infrastructure.util;
 
-import org.springframework.security.core.context.ReactiveSecurityContextHolder;
 import org.springframework.security.core.context.SecurityContext;
-import reactor.core.publisher.Mono;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.security.Principal;
+import java.util.Optional;
 
 public class SecurityUtil {
-    public static Mono<String> getAuthSubject() {
-        return ReactiveSecurityContextHolder.getContext()
+    private SecurityUtil() {}
+    public static Optional<String> getAuthSubject() {
+        return Optional.ofNullable(SecurityContextHolder.getContext())
             .map(SecurityContext::getAuthentication)
             .map(Principal::getName);
     }

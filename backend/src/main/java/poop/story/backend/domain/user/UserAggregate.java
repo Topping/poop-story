@@ -12,6 +12,7 @@ import poop.story.backend.domain.AuditedBaseEntity;
 import poop.story.backend.domain.happening.Happening;
 import poop.story.backend.domain.happening.Happening_;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -40,6 +41,9 @@ public class UserAggregate extends AuditedBaseEntity<UserAggregate> {
     }
 
     public UserAggregate registerHappening(HappeningDTO happening) {
+        if (this.happenings == null) {
+            happenings = new ArrayList<>();
+        }
         var h = new Happening(this,
             happening.lat(),
             happening.lon(),
