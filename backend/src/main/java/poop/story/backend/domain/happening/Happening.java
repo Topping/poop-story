@@ -13,6 +13,7 @@ import org.locationtech.jts.geom.Coordinate;
 import org.locationtech.jts.geom.GeometryFactory;
 import org.locationtech.jts.geom.Point;
 import org.locationtech.jts.geom.PrecisionModel;
+import poop.story.backend.application.model.happening.HappeningDTO;
 import poop.story.backend.domain.user.UserAggregate;
 
 import java.io.Serializable;
@@ -32,6 +33,9 @@ public class Happening implements Serializable {
     @Column(name = "location", nullable = false)
     private Point location;
 
+    @Column(name = "rating", nullable = false)
+    private float rating;
+
     @Column(name = "happening_time", nullable = false, updatable = false)
     private Instant happeningTime;
 
@@ -40,6 +44,15 @@ public class Happening implements Serializable {
     private HappeningType happeningType;
 
     protected Happening() {}
+
+    public Happening(UserAggregate creator, HappeningDTO dto) {
+        this.id = UUID.randomUUID();
+        this.creator = creator;
+        this.happeningTime = dto.when() == null ? Instant.now() : dto.when();
+        this.happeningType = dto.type();
+        var g = new GeometryFactory(new PrecisionModel(PrecisionModel.FLOATING), 4326);
+        this.location = g.createPoint(new Coordinate(dto.lat(), dto.lon()));
+    }
 
     public Happening(UserAggregate creator, double lat, double lon, Instant happeningTime, HappeningType type) {
         this.id = UUID.randomUUID();

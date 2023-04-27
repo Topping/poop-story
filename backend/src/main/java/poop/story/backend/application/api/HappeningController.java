@@ -23,11 +23,11 @@ import java.util.stream.Stream;
 @RestController
 @CrossOrigin
 @RequestMapping("/api/private/user")
-public class UserController {
+public class HappeningController {
     private final UserService userService;
 
     @Autowired
-    public UserController(UserService userService) {
+    public HappeningController(UserService userService) {
         this.userService = userService;
     }
 
