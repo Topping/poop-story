@@ -19,6 +19,8 @@ services:
       spring.datasource.url: jdbc:postgresql://database:5432/poopstory
       spring.datasource.username: poop
       spring.datasource.password: localdev
+    ports:
+      - 8080:8080
   database:
     extends:
       file: docker-compose.base.yml

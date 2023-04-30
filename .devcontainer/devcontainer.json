@@ -1,6 +1,6 @@
 {
     "image": "mcr.microsoft.com/devcontainers/typescript-node",
-    "forwardPorts": [3000,5432,8080,5080],
+    "forwardPorts": [3000],
     "extensions": [
         "ms-vscode.vscode-typescript-next",
         "dbaeumer.vscode-eslint",
