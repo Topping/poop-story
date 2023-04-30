@@ -52,5 +52,7 @@ services:
       driver: loki
       options:
         loki-url: https://${LOG_AUTH}@${LOG_HOST}/loki/api/v1/push
+        loki-pipeline-stages: |
+          - docker: {}
     volumes:
       - ./data/postgres:/var/lib/postgresql/data:rw

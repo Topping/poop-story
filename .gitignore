@@ -2,4 +2,4 @@ frontend/
 *.env
 !local.env
 ignored/
-data/
+./data/
