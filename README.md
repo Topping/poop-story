@@ -1,8 +1,7 @@
 ## How
-Start: 
+Start backend services for testing purposes: 
 ```
-cd poop-story
-docker compose up -d backend
+docker compose -f docker-compose.local-dev.yml up -d --build
 ```
 
-Swagger UI: `http://localhost:8080/`
+Swagger UI: `http://localhost:8080/swagger-ui/index.html`
