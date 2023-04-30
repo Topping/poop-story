@@ -34,3 +34,12 @@ CREATE INDEX idx_country_geography ON poopstory.countries USING gist(boundary);
 CREATE INDEX idx_country_common_name ON poopstory.countries USING btree(common_name);
 CREATE INDEX idx_country_iso3_code ON poopstory.countries USING btree(iso3_code);
 CREATE INDEX idx_country_iso2_code ON poopstory.countries USING btree(iso2_code);
+
+-- changeset nik:2023-04-30:1
+CREATE TABLE shedlock (
+  name VARCHAR(64),
+  lock_until TIMESTAMP(3) NULL,
+  locked_at TIMESTAMP(3) NULL,
+  locked_by VARCHAR(255),
+  PRIMARY KEY (name)
+);

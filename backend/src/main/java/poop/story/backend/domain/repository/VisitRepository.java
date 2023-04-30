@@ -2,7 +2,6 @@ package poop.story.backend.domain.repository;
 
 import org.locationtech.jts.geom.Geometry;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import poop.story.backend.domain.visit.Visit;
@@ -10,7 +9,7 @@ import poop.story.backend.domain.visit.Visit;
 import java.util.List;
 import java.util.UUID;
 
-public interface VisitRepository extends JpaRepository<Visit, UUID>, JpaSpecificationExecutor<Visit> {
+public interface VisitRepository extends JpaRepository<Visit, UUID> {
     List<Visit> findAllByCreatorId(String creatorId);
     Visit findByIdAndCreatorId(UUID id, String creatorId);
     @Query(value = "SELECT * FROM poopstory.visits WHERE creator_id = ?1 AND ST_Covers(?2, visits.location)", nativeQuery = true)

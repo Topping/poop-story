@@ -17,9 +17,6 @@ spring:
 liquibase:
   changelog.path: src/main/resources/db/changelog/
   domain.package: poop.story.backend.domain.model
-logging:
-  level:
-    ROOT: DEBUG
 springdoc:
   version: '@springdoc.version@'
   swagger-ui:

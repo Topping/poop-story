@@ -14,8 +14,13 @@ public interface CountryRepository extends JpaRepository<Country, UUID> {
     @Query(value = "SELECT * FROM poopstory.countries WHERE ST_Covers(countries.boundary, ?1);", nativeQuery = true)
     Country findCountryContainingPoint(Point point);
 
+    Country findCountryByCommonName(String commonName);
+
     @Query(value = "SELECT * FROM poopstory.countries LIMIT 1;", nativeQuery = true)
     Optional<Country> findFirst();
+
+    @Query(value = "SELECT * FROM poopstory.countries ORDER BY random() LIMIT 1;", nativeQuery = true)
+    Country findRandom();
 
     @Query(value = "SELECT poopstory.countries.common_name FROM poopstory.countries " +
         " INNER JOIN poopstory.visits " +

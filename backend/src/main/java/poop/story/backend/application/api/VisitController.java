@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import poop.story.backend.application.model.GeoJsonPolygon;
 import poop.story.backend.application.model.visit.VisitDTO;
 import poop.story.backend.application.service.visit.VisitService;
+import poop.story.backend.infrastructure.monitoring.StatsScraper;
 
 import java.util.List;
 
@@ -25,10 +26,12 @@ import java.util.List;
 @Validated
 public class VisitController {
     private final VisitService visitService;
+    private final StatsScraper scraper;
 
     @Autowired
-    public VisitController(VisitService visitService) {
+    public VisitController(VisitService visitService, StatsScraper scraper) {
         this.visitService = visitService;
+        this.scraper = scraper;
     }
 
     @GetMapping
@@ -55,5 +58,10 @@ public class VisitController {
     @PostMapping("/bounding")
     public List<VisitDTO> findInBoundingBox(@RequestBody GeoJsonPolygon polygon) {
         return visitService.findWithinPolygon(polygon);
+    }
+
+    @GetMapping("/scrape")
+    public void doScrape() {
+        scraper.scrape();
     }
 }

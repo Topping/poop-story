@@ -45,6 +45,12 @@ dependencies {
 	// Location
 	implementation group: 'org.locationtech.jts.io', name: 'jts-io-common', version: '1.19.0'
 
+	// Scheduler
+	implementation group: 'net.javacrumbs.shedlock', name: 'shedlock-spring', version: '5.2.0'
+	implementation group: 'net.javacrumbs.shedlock', name: 'shedlock-provider-jdbc-template', version: '5.2.0'
+
+
+
 	// JDBC
 	runtimeOnly 'org.postgresql:postgresql'
 	implementation 'org.springframework:spring-jdbc'

@@ -3,3 +3,6 @@ spring:
     url: jdbc:postgresql://localhost:5432/poopstory
     username: poop
     password: localdev
+logging:
+  level:
+    ROOT: DEBUG
