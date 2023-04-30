@@ -15,7 +15,7 @@ import java.util.List;
 @Component
 public class StatsScraper {
     private static final String VISIT_COUNT_KEY = "io.poopstory.visits";
-    private static final long FIVE_MINUTES_MS = 5 * 60 * 1000;
+    private static final long ONE_HOUR_MS = 60L * 60L * 1000L;
 
     private final VisitAggregationRepository aggregationRepository;
     private final CountryRepository countryRepository;
@@ -26,13 +26,14 @@ public class StatsScraper {
         this.countryRepository = countryRepository;
     }
 
-    @Scheduled(fixedDelay = FIVE_MINUTES_MS, initialDelay = FIVE_MINUTES_MS)
+    @Scheduled(fixedDelay = ONE_HOUR_MS, initialDelay = ONE_HOUR_MS)
     @SchedulerLock(lockAtLeastFor = "PT5M", lockAtMostFor = "PT10M")
     public void scrape() {
         aggregationRepository.countVisitByCountry().forEach(this::registerCount);
     }
 
     private void registerCount(VisitCountryAggregation aggregation) {
+        if (aggregation.count() == 0) return;
         var country = countryRepository.findCountryByCommonName(aggregation.country());
         var center = country.boundary().getCentroid();
         var lon = center.getX();
