@@ -56,5 +56,4 @@ public class VisitController {
     public List<VisitDTO> findInBoundingBox(@RequestBody GeoJsonPolygon polygon) {
         return visitService.findWithinPolygon(polygon);
     }
-
 }
