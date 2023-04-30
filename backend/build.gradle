@@ -21,31 +21,33 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 
 	// springdoc
-	// https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-ui
 	implementation group: 'org.springdoc', name: 'springdoc-openapi-starter-webmvc-ui', version: '2.1.0'
 
-	// https://mvnrepository.com/artifact/org.springframework.security/spring-security-oauth2-jose
+	// Spring
 	implementation group: 'org.springframework.security', name: 'spring-security-oauth2-jose', version: '6.0.2'
 	implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
 	implementation 'org.springframework.boot:spring-boot-starter-security'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
-	implementation 'org.springframework:spring-jdbc'
+
+	// Hibernate + Liquibase
 	implementation 'org.liquibase:liquibase-core'
-	// https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-core
 	implementation group: 'org.hibernate.orm', name: 'hibernate-core', version: '6.2.0.Final'
-	// https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-spatial
 	implementation group: 'org.hibernate.orm', name: 'hibernate-spatial', version: '6.2.0.Final'
-	// https://mvnrepository.com/artifact/org.hibernate.orm/hibernate-jpamodelgen
 	implementation group: 'org.hibernate.orm', name: 'hibernate-jpamodelgen', version: '6.2.0.Final'
 	annotationProcessor group: 'org.hibernate.orm', name: 'hibernate-jpamodelgen', version: '6.2.0.Final'
+
+	// Observability
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'io.micrometer:micrometer-registry-prometheus'
 
+	// Location
+	implementation group: 'org.locationtech.jts.io', name: 'jts-io-common', version: '1.19.0'
 
 	// JDBC
 	runtimeOnly 'org.postgresql:postgresql'
+	implementation 'org.springframework:spring-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-jdbc'
 
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'

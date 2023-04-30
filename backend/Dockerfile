@@ -1,7 +1,7 @@
 FROM gradle:jdk17-alpine as builder
 WORKDIR /app
 ADD . .
-RUN ./gradlew init build
+RUN ./gradlew build --no-daemon
 
 FROM eclipse-temurin:17.0.6_10-jre-alpine
 COPY --from=builder /app/build/libs/backend-0.0.1-SNAPSHOT.jar .

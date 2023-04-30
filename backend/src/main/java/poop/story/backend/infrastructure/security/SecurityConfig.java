@@ -44,7 +44,6 @@ public class SecurityConfig {
         By default, Spring Security does not validate the "aud" claim of the token, to ensure that this token is
         indeed intended for our app. Adding our own validator is easy to do:
         */
-
         var jwtDecoder = NimbusJwtDecoder.withJwkSetUri(jwksUri).build();
 
         OAuth2TokenValidator<Jwt> audienceValidator = new AudienceValidator(audience);

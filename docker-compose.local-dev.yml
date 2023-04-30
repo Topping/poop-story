@@ -1,0 +1,32 @@
+version: '3.9'
+services:
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    ports:
+      - 5080:5080
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "admin@example.com"
+      PGADMIN_DEFAULT_PASSWORD: localdev
+      PGADMIN_DISABLE_POSTFIX: "true"
+      PGADMIN_LISTEN_PORT: 5080
+  backend:
+    extends:
+      file: docker-compose.base.yml
+      service: backend
+    environment:
+      spring_profiles_active: docker
+      management.server.port: 8081
+      spring.datasource.url: jdbc:postgresql://database:5432/poopstory
+      spring.datasource.username: poop
+      spring.datasource.password: localdev
+  database:
+    extends:
+      file: docker-compose.base.yml
+      service: database
+    environment:
+      POSTGRES_PASSWORD: localdev
+      POSTGRES_USER: poop
+    ports:
+      - 5432:5432
+volumes:
+  pgadmin:

@@ -9,6 +9,6 @@ public class Auditor implements AuditorAware<String> {
 
     @Override
     public Optional<String> getCurrentAuditor() {
-        return SecurityUtil.getAuthSubject();
+        return SecurityUtil.getAuthSubjectOptional();
     }
 }
