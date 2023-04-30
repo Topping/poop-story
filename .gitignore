@@ -2,4 +2,5 @@ frontend/
 *.env
 !local.env
 ignored/
-./data/
+data/
+!backend/src/main/resources/data

@@ -31,12 +31,12 @@ public class VisitController {
         this.visitService = visitService;
     }
 
-    @GetMapping("")
+    @GetMapping
     public List<VisitDTO> fetchMyVisits(@RequestParam(value = "country", required = false) String countryISO2Code) {
         return visitService.fetchAllVisits(countryISO2Code);
     }
 
-    @PostMapping("")
+    @PostMapping
     public ResponseEntity<VisitDTO> registerVisit(@RequestBody VisitDTO dto) {
         var saved = visitService.saveVisit(dto);
         return ResponseEntity.status(HttpStatus.CREATED).body(saved);

@@ -1,42 +1,5 @@
-auth0:
-  audience: https://api.poopstory.io
-  domain: https://poopstory.eu.auth0.com/
 spring:
-  application.name: poopstory
-  jpa:
-    properties.hibernate.dialect: org.hibernate.dialect.PostgreSQLDialect
-    hibernate.ddl-auto: none
-  liquibase:
-    enabled: true
   datasource:
     url: jdbc:postgresql://localhost:5432/poopstory
     username: poop
     password: localdev
-  security:
-    oauth2:
-      resourceserver:
-        jwt:
-          issuer-uri: https://poopstory.eu.auth0.com/
-          jwks-uri: https://poopstory.eu.auth0.com/.well-known/jwks.json
-liquibase:
-  changelog.path: src/main/resources/db/changelog/
-  domain.package: poop.story.backend.domain.model
-logging:
-  level:
-    ROOT: DEBUG
-springdoc:
-  version: '@springdoc.version@'
-  swagger-ui:
-    display-request-duration: true
-    groups-order: DESC
-    operationsSorter: method
-    disable-swagger-default-url: true
-    use-root-path: true
-    path: /swagger-ui.html
-  show-actuator: false
-# Metrics
-management:
-  metrics.export.prometheus.enabled: true
-  endpoints:
-    prometheus.enabled: true
-    web.exposure.include: health,prometheus
