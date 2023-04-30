@@ -8,8 +8,6 @@ services:
       - 80:8080
     depends_on:
       - database
-    environment:
-      
     restart: always
   database:
     container_name: database
@@ -17,7 +15,5 @@ services:
     restart: always
     ports:
       - ${POSTGRES_PORT}:5432
-    environment:
-      POSTGRES_DB: poopstory
     volumes:
       - ./data/postgres:/var/lib/postgresql/data:rw
