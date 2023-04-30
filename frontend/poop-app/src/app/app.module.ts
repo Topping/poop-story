@@ -5,9 +5,10 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
 import { AuthModule } from "@auth0/auth0-angular";
+import { LoginButtonComponent } from './login-button/login-button.component';
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, LoginButtonComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
