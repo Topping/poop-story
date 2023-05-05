@@ -8,9 +8,10 @@ import { AuthModule } from "@auth0/auth0-angular";
 import { LoginButtonComponent } from "./login-button/login-button.component";
 import { PoopMapComponent } from "./poop-map/poop-map.component";
 import { FrontPageComponent } from "./front-page/front-page.component";
+import { UserProfileComponent } from './user-profile/user-profile.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginButtonComponent, PoopMapComponent, FrontPageComponent],
+  declarations: [AppComponent, LoginButtonComponent, PoopMapComponent, FrontPageComponent, UserProfileComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
