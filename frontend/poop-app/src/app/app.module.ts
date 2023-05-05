@@ -5,9 +5,9 @@ import { AppRoutingModule } from "./app-routing.module";
 import { AppComponent } from "./app.component";
 
 import { AuthModule } from "@auth0/auth0-angular";
-import { LoginButtonComponent } from './login-button/login-button.component';
-import { PoopMapComponent } from './poop-map/poop-map.component';
-import { FrontPageComponent } from './front-page/front-page.component';
+import { LoginButtonComponent } from "./login-button/login-button.component";
+import { PoopMapComponent } from "./poop-map/poop-map.component";
+import { FrontPageComponent } from "./front-page/front-page.component";
 
 @NgModule({
   declarations: [AppComponent, LoginButtonComponent, PoopMapComponent, FrontPageComponent],
