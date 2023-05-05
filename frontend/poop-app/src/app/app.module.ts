@@ -6,9 +6,11 @@ import { AppComponent } from "./app.component";
 
 import { AuthModule } from "@auth0/auth0-angular";
 import { LoginButtonComponent } from './login-button/login-button.component';
+import { PoopMapComponent } from './poop-map/poop-map.component';
+import { FrontPageComponent } from './front-page/front-page.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginButtonComponent],
+  declarations: [AppComponent, LoginButtonComponent, PoopMapComponent, FrontPageComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
