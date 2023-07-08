@@ -16,7 +16,9 @@ public class ExceptionControllerAdvice {
     }
 
     @ExceptionHandler(value = PersistFailedException.class)
-    public ResponseEntity<Object> persistFailedException() {
-        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    public ResponseEntity<Object> persistFailedException(PersistFailedException exception) {
+        return exception.userError()
+            ? ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception.getMessage())
+            : ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Internal Server Error");
     }
 }

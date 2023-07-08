@@ -55,7 +55,7 @@ public class VisitService {
     public VisitDTO saveVisit(VisitDTO dto) {
         var creatorId = SecurityUtil.getAuthSubject();
         var targetCountry = countryRepository.findCountryContainingPoint(Location.toPoint(dto.location()));
-        if (targetCountry == null) throw new PersistFailedException("Visit is not in recognized country.");
+        if (targetCountry == null) throw PersistFailedException.userError("Visit is not in recognized country.");
 
         var entity = mapDtoToEntity(targetCountry.id(), creatorId, dto);
         try {
@@ -63,7 +63,7 @@ public class VisitService {
             return mapEntityToDto(savedVisit);
         } catch (Exception ex) {
             LOG.error("Failed writing new visit.", ex);
-            throw new PersistFailedException("Failed while trying to save visit.");
+            throw PersistFailedException.serverError("Failed while trying to save visit.");
         }
     }
 
