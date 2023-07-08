@@ -1,0 +1,15 @@
+<div *ngIf="auth.user$ | async as user">
+  <section>
+    <h1>Profile</h1>
+    <ul>
+      <li>Name: {{ user.name }}</li>
+      <li>Email: {{ user.email }}</li>
+    </ul>
+  </section>
+  <section>
+    <h1>Poop stats</h1>
+    <ul>
+      <li># of poops: {{ numPoops }}</li>
+    </ul>
+  </section>
+</div>
