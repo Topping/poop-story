@@ -19,6 +19,7 @@
     "@angular/platform-browser-dynamic": "^15.2.0",
     "@angular/router": "^15.2.0",
     "@auth0/auth0-angular": "^2.1.0",
+    "emojisplosion": "^2.6.1",
     "leaflet": "^1.9.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

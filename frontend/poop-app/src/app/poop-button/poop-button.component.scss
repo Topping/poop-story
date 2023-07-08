@@ -1,0 +1,20 @@
+button {
+  all: unset;
+  cursor: pointer;
+  font-size: 144px;
+}
+
+button:focus {
+  outline: orange 2px auto;
+}
+
+button:hover {
+  filter: drop-shadow(0 0 0.75rem yellow);
+}
+
+#poop-button-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}

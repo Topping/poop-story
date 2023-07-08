@@ -9,10 +9,16 @@ import * as L from "leaflet";
 export class PoopMapComponent implements AfterViewInit {
   map: L.Map | undefined;
 
-  private initMap(): void {
+  private currentPosition = navigator.geolocation.getCurrentPosition(({ coords }) => {
+    console.log({ coords });
+    this.initMap(coords);
+  });
+
+  private initMap(position: GeolocationCoordinates): void {
     this.map = L.map("map", {
-      center: [39.8282, -98.5795],
-      zoom: 3,
+      // center: [39.8282, -98.5795],
+      center: [position.latitude, position.longitude],
+      zoom: 15,
     });
 
     const tiles = L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -27,6 +33,7 @@ export class PoopMapComponent implements AfterViewInit {
   constructor() {}
 
   ngAfterViewInit(): void {
-    this.initMap();
+    // this.initMap();
+    // this.currentPosition;
   }
 }

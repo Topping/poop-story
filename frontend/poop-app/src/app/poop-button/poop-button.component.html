@@ -1,0 +1,10 @@
+<!-- Add login redirect / route guard -->
+<div id="poop-button-container">
+  <button (click)="doThePoop()" title="Click here to poop!" id="poop-button">💩</button>
+  <ng-container *ngIf="!poopErrored; else error">
+    <span [ngStyle]="{ opacity: hasPooped ? 1 : 0 }">Poop logged!</span>
+  </ng-container>
+  <ng-template #error>
+    <span>Something went wrong 😥</span>
+  </ng-template>
+</div>
